@@ -3,94 +3,98 @@ import java.util.Scanner;
 
 public class CirullaCounter {
 
+    public static String getPlayerName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        return name;
+    }
+
+    public static int getPlayerNum(String type) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(String.format("Enter the number of %s: ", type));
+        int cards = scanner.nextInt();
+        return cards;
+    }
+
     public static void main(String[] args) {
 
-        // INIT SCANNER
+        int player1Poitns = 0;
+        int player2Poitns = 0;
 
-        Scanner scanner = new Scanner(System.in);
-
-        // WELCOMER
-
+        // Get players name
         System.out.println("Benvenuti nel calcolatore di punti per Cirulla! Inserire i nomi dei due giocatori.");
-        String namePlayer1 = scanner.nextLine();
-        System.out.println("vs");
-        String namePlayer2 = scanner.nextLine();
-        System.out.println("Ciao " + namePlayer1 + " e " + namePlayer2);
+        String player1 = getPlayerName();
+        String player2 = getPlayerName();
 
-        // SOMMA TOTALE
+        // Get players cards
+        System.out.println("Inserire il numero di carte per ogni giocatore.");
 
-        int pointP1 = 0;
-        int pointP2 = 0;
+        int player1Cards = getPlayerNum("carte");
+        int player2Cards = getPlayerNum("carte");
 
-        // CARTE
-
-        System.out.println("Quante Carte avete?");
-
-        int numCarte1 = scanner.nextInt();
-        int numCarte2 = scanner.nextInt();
-
-        while (numCarte1 + numCarte2 != 40) {
-            System.out.println("Avete sbagliato a contare Riprova");
-            numCarte1 = scanner.nextInt();
-            numCarte2 = scanner.nextInt();
+        while (!(player1Cards + player2Cards == 40)) {
+            System.out.println("Il numero di carte supera 40, riprova.");
+            player1Cards = getPlayerNum("carte");
+            player2Cards = getPlayerNum("carte");
         }
 
-        if (numCarte1 == numCarte2) {
-            System.out.println("0-0");
-        } else if (numCarte1 > numCarte2) {
-            pointP1++;
-            System.out.println(pointP1 + "-0");
+        if (player1Cards == player2Cards) {
+            continue;
+        } else if (player1Cards > player2Cards) {
+            player1Poitns++;
         } else {
-            pointP2++;
-            System.out.println("0-" + pointP2);
+            player2Poitns++;
         }
+
+        System.out.println(
+                String.format("Punti di %s: %d\nPunti di %s: %d", player1, player1Poitns, player2, player2Poitns));
 
         // DENARI
 
-        System.out.println("Quanti Denari Avete?");
+        int player1Seven = getPlayerNum("denari");
+        int player2Denari = getPlayerNum("denari");
 
-        int numDenari1 = scanner.nextInt();
-        int numDenari2 = scanner.nextInt();
-
-        while (numDenari1 + numDenari2 != 10) {
-            System.out.println("Avete sbagliato a contare Riprova");
-            numDenari1 = scanner.nextInt();
-            numDenari2 = scanner.nextInt();
+        while (!(player1Denari + player2Denari == 10)) {
+            System.out.println("Il numero di denari supera 10, riprova.");
+            player1Denari = getPlayerNum("denari");
+            player2Denari = getPlayerNum("denari");
         }
 
-        if (numDenari1 == numDenari2) {
-            System.out.println(pointP1 + "-" + pointP2);
-        } else if (numDenari1 > numDenari2) {
-            pointP1++;
-            System.out.println(pointP1 + "-" + pointP2);
+        if (player1Denari == player2Denari) {
+            continue;
+        } else if (player1Denari > player2Denari) {
+            player1Poitns++;
         } else {
-            pointP2++;
-            System.out.println(pointP1 + "-" + pointP2);
+            player2Poitns++;
         }
+
+        System.out.println(
+                String.format("Punti di %s: %d\nPunti di %s: %d", player1, player1Poitns, player2, player2Poitns));
 
         // PRIMIERA
+        // ! Too fix from here
 
-        System.out.println("Quanti Sette Avete?");
+        int player1Seven = getPlayerNum("sette");
+        int player2Seven = getPlayerNum("sette");
 
-        int numSette1 = scanner.nextInt();
-        int numSette2 = scanner.nextInt();
-
-
-        while (numSette1 + numSette2 != 4) {
-            System.out.println("Avete sbagliato a contare Riprova");
-            numSette1 = scanner.nextInt();
-            numSette2 = scanner.nextInt();
+        while (!(player1Seven + player2Sevem == 4)) {
+            System.out.println("Il numero di carte supera 10, riprova.");
+            player1Seven = getPlayerNum("sette");
+            player2Seven = getPlayerNum("sette");
         }
 
-        if (numSette1 > numSette2) {
-            pointP1++;
-            System.out.println(pointP1 + "-" + pointP2);
+        if (player1Seven == player2Sevem) {
+            continue;
+        } else if (player1Seven > player2Sevem) {
+            player1Poitns++;
+        } else {
+            player2Poitns++;
         }
 
-        if (numSette1 < numSette2) {
-            pointP2++;
-            System.out.println(pointP1 + "-" + pointP2);
-        }
+        System.out.println(
+                String.format("Punti di %s: %d\nPunti di %s: %d", player1, player1Poitns, player2, player2Poitns));
+
 
         int numSei1;
         int numSei2;
@@ -136,7 +140,6 @@ public class CirullaCounter {
 
         System.out.println("Chi ha il Re Bello");
 
-
         Scanner reBelloImput = new Scanner(System.in);
         String reBelloName = reBelloImput.nextLine();
 
@@ -153,7 +156,6 @@ public class CirullaCounter {
         // SETTE BELLO
 
         System.out.println("Chi ha il Sette Bello");
-
 
         Scanner setteBelloImput = new Scanner(System.in);
         String setteBelloName = setteBelloImput.nextLine();
@@ -211,23 +213,23 @@ public class CirullaCounter {
 
         // GRANDE
 
-        System.out.println("Qualcuno ha la Grande?");
+        // System.out.println("Qualcuno ha la Grande?");
 
-        Scanner grandeImput = new Scanner(System.in);
-        String grandeName = grandeImput.nextLine();
+        // Scanner grandeImput = new Scanner(System.in);
+        // String grandeName = grandeImput.nextLine();
 
-        if (grandeName == "no") {
+        // if (grandeName == "no") {
 
-            System.out.println(pointP111 + "-" + pointP222);
-        }
-        if (Objects.equals(grandeName, namePlayer1)) {
-            System.out.println("5-0");
+        // System.out.println(pointP111 + "-" + pointP222);
+        // }
+        // if (Objects.equals(grandeName, namePlayer1)) {
+        // System.out.println("5-0");
 
-        }
-        if (Objects.equals(grandeName, namePlayer2)) {
-            System.out.println("0-5");
+        // }
+        // if (Objects.equals(grandeName, namePlayer2)) {
+        // System.out.println("0-5");
 
-        }
+        // }
 
     }
 }
